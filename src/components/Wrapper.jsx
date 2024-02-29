@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Home(props) {
+function Wrapper(props) {
     return (
         <div>
-            <p>Home page</p>
+            {props.children}
         </div>
     )
 }
 
-export default Home;
+export default Wrapper;
