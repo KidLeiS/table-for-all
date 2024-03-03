@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import API from "../assets/API";
 import "bootstrap/dist/css/bootstrap.css";
-import { useParams } from "react-router-dom";
-import { Button, Card, Row, Container } from "react-bootstrap";
+import axios from "axios";
+import { Button, Card, Col, Row, Container, Form } from "react-bootstrap";
 import SearchResults from "../pages/Searchresults";
+import { Link, useNavigate } from "react-router-dom";
+import Recipe from "../pages/Recipe";
 
 function Searchform() {
 	const intolerances = [
@@ -67,37 +69,26 @@ function Searchform() {
 			name: "Wheat",
 			checked: false,
 		},
+		{
+			id: " ",
+			name: "None",
+			checked: true,
+		},
 	];
 	const [checked, setChecked] = useState(intolerances);
-
-	const params = useParams();
-	const search = useRef();
+	const [searchRecipe, setSearchRecipe] = useState({
+		search: "",
+		results: [],
+	});
 
 	const filters = document.querySelector(".options");
 
 	const getRecipe = (query, filter) => {
 		API.search(query, filter)
 			.then((res) => {
-				return console.log(res.data.results);
+				setSearchRecipe({ ...searchRecipe, results: res.data.results });
 			})
 			.catch((err) => console.log(err));
-	};
-
-	const handleFormSubmit = (event) => {
-		event.preventDefault();
-		getRecipe(search.current.value, filters.textContent);
-	};
-
-	const handleCheckbox = (id) => {
-		setChecked((prev) => {
-			return prev.map((item) => {
-				if (item.name === id) {
-					return { ...item, checked: !item.checked };
-				} else {
-					return { ...item };
-				}
-			});
-		});
 	};
 
 	const getIntolerances = () => {
@@ -118,6 +109,18 @@ function Searchform() {
 		));
 	};
 
+	const handleCheckbox = (id) => {
+		setChecked((prev) => {
+			return prev.map((item) => {
+				if (item.name === id) {
+					return { ...item, checked: !item.checked };
+				} else {
+					return { ...item };
+				}
+			});
+		});
+	};
+
 	function getFilters() {
 		return checked.map((item) => {
 			if (item.checked) {
@@ -130,16 +133,28 @@ function Searchform() {
 		});
 	}
 
+	const handleInputChange = (event) => {
+		const { name, value } = event.target;
+
+		setSearchRecipe({
+			...searchRecipe,
+			[name]: value,
+		});
+	};
+	const handleFormSubmit = (event) => {
+		event.preventDefault();
+		getRecipe(searchRecipe.search, filters.textContent);
+	};
+
 	return (
-		<div>
-			<form>
+		<Container>
+			<Form>
 				<div className="mb-3">
 					<input
 						className="form-control"
-						ref={search}
 						type="text"
+						onChange={handleInputChange}
 						name="search"
-						label="recipe"
 						aria-describedby="Recipe search field"
 						placeholder="Search recipes, ingredients, nutrients..."
 					/>
@@ -151,8 +166,8 @@ function Searchform() {
 				>
 					Get inspirations!
 				</button>
-			</form>
-			<div>
+			</Form>
+			<Row>
 				<h5>
 					Your intolerances: {"  "}
 					<span className="options">{getFilters()}</span>
@@ -161,10 +176,27 @@ function Searchform() {
 				<div className="fluid-container">
 					<div className="intolerances row">{getIntolerances()}</div>
 				</div>
-			</div>
-
-			{/* <SearchResults key={}/> */}
-		</div>
+			</Row>
+			<Col lg={5} sm={12}>
+				{searchRecipe.results.map((data) => (
+					<Link to={`/recipe/${data.id}`}>
+						<Card
+							className="m-4"
+							border="light"
+							onClick={(e) => {
+								e.preventDefault();
+								Recipe(data.id);
+							}}
+						>
+							<Card.Img key={data.id} src={data.image} alt={data.title} />
+							<Card.Body>
+								<Card.Title>{data.title}</Card.Title>
+							</Card.Body>
+						</Card>
+					</Link>
+				))}
+			</Col>
+		</Container>
 	);
 }
 export default Searchform;
