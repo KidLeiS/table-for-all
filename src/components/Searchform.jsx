@@ -1,203 +1,170 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import API from "../assets/API";
 import "bootstrap/dist/css/bootstrap.css";
-import axios from "axios";
-import { Button, Card, Container, Row, Col } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import { Button, Card, Row, Container } from "react-bootstrap";
+import SearchResults from "../pages/Searchresults";
 
 function Searchform() {
-	const [searchData, setSearchData] = useState({
-		search: "",
-		// intolerances: "",
-		results: [],
-	});
+	const intolerances = [
+		{
+			id: "dairy",
+			name: "Dairy",
+			checked: false,
+		},
+		{
+			id: "egg",
+			name: "Egg",
+			checked: false,
+		},
+		{
+			id: "gluten",
+			name: "Gluten",
+			checked: false,
+		},
+		{
+			id: "grain",
+			name: "Grain",
+			checked: false,
+		},
+		{
+			id: "peanut",
+			name: "Peanut",
+			checked: false,
+		},
+		{
+			id: "seafood",
+			name: "Seafood",
+			checked: false,
+		},
+		{
+			id: "sesame",
+			name: "Sesame",
+			checked: false,
+		},
+		{
+			id: "shellfish",
+			name: "Shellfish",
+			checked: false,
+		},
+		{
+			id: "soy",
+			name: "Soy",
+			checked: false,
+		},
+		{
+			id: "sulfite",
+			name: "Sulfite",
+			checked: false,
+		},
+		{
+			id: "tree nut",
+			name: "Tree nut",
+			checked: false,
+		},
+		{
+			id: "wheat",
+			name: "Wheat",
+			checked: false,
+		},
+	];
+	const [checked, setChecked] = useState(intolerances);
+
+	const params = useParams();
+	const search = useRef();
+
+	const filters = document.querySelector(".options");
 
 	const getRecipe = (query, filter) => {
 		API.search(query, filter)
-			.then((res) =>
-				setSearchData({ ...searchData, results: res.data.results })
-			)
+			.then((res) => {
+				return console.log(res.data.results);
+			})
 			.catch((err) => console.log(err));
 	};
 
-	const handleInputChange = (event) => {
-		const { name, value } = event.target;
-
-		setSearchData({
-			...searchData,
-			[name]: value,
-		});
-	};
 	const handleFormSubmit = (event) => {
 		event.preventDefault();
-		getRecipe(searchData.search, searchData.intolerances);
+		getRecipe(search.current.value, filters.textContent);
 	};
 
-	// get 5 recipes from search results
-	function getList(data) {
-		return (
-			<Card style={{ width: "28rem", margin: 20 }}>
-				<Card.Img key={data.id} src={data.image} alt={data.title} />
-				<Card.Body>
-					<Card.Title>{data.title}</Card.Title>
-					<Button variant="warning">Placeholder instruction</Button>
-				</Card.Body>
-			</Card>
-		);
+	const handleCheckbox = (id) => {
+		setChecked((prev) => {
+			return prev.map((item) => {
+				if (item.name === id) {
+					return { ...item, checked: !item.checked };
+				} else {
+					return { ...item };
+				}
+			});
+		});
+	};
+
+	const getIntolerances = () => {
+		return checked.map((item) => (
+			<div className="intolerance col p-2 " key={item.name}>
+				<input
+					type="checkbox"
+					className="btn-check"
+					id={item.name}
+					label={item.name}
+					onClick={() => handleCheckbox(item.name)}
+				/>
+				{item.checked}
+				<label className="btn btn-outline-danger" htmlFor={item.name}>
+					{item.name}
+				</label>
+			</div>
+		));
+	};
+
+	function getFilters() {
+		return checked.map((item) => {
+			if (item.checked) {
+				return (
+					<span className="option" key={item.name}>
+						{...item.id},
+					</span>
+				);
+			}
+		});
 	}
+
 	return (
 		<div>
 			<form>
 				<div className="mb-3">
-					<label htmlFor="search" className="form-label">
-						Recipe search:
-						<input
-							onChange={handleInputChange}
-							type="text"
-							className="form-control"
-							name="search"
-							aria-describedby="Recipe search field"
-						/>
-					</label>
-					<div id="searchHelp" className="form-text">
-						Feel free to search by recipe keywords or ingredient names!
-					</div>
-				</div>
-				<div id="allergens" className="mb-3 form-check container">
-					<div id="allergensHelp" className="form-text">
-						Please check all your allergens/intolerances:{" "}
-					</div>
-					<div className="row">
-						<div className="col">
-							<label className="form-check-label" htmlFor="dairy">
-								Dairy
-								<input
-									type="checkbox"
-									className="form-check-input"
-									id="dairy"
-								/>
-							</label>
-						</div>
-						<div className="col">
-							<label className="form-check-label" htmlFor="egg">
-								Egg
-								<input type="checkbox" className="form-check-input" id="egg" />
-							</label>
-						</div>
-						<div className="col">
-							<label className="form-check-label" htmlFor="gluten">
-								Gluten
-								<input
-									type="checkbox"
-									className="form-check-input"
-									id="gluten"
-								/>
-							</label>
-						</div>
-						<div className="col">
-							<label className="form-check-label" htmlFor="grain">
-								Grain
-								<input
-									type="checkbox"
-									className="form-check-input"
-									id="grain"
-								/>
-							</label>
-						</div>
-					</div>
-					<div className="row">
-						<div className="col">
-							<label className="form-check-label" htmlFor="peanut">
-								Peanut
-								<input
-									type="checkbox"
-									className="form-check-input"
-									id="peanut"
-								/>
-							</label>
-						</div>
-						<div className="col">
-							<label className="form-check-label" htmlFor="sesame">
-								Sesame
-								<input
-									type="checkbox"
-									className="form-check-input"
-									id="sesame"
-								/>
-							</label>
-						</div>
-						<div className="col">
-							<label className="form-check-label" htmlFor="treeNut">
-								Tree nut
-								<input
-									type="checkbox"
-									className="form-check-input"
-									id="treeNut"
-								/>
-							</label>
-						</div>
-						<div className="col">
-							<label className="form-check-label" htmlFor="soy">
-								Soy
-								<input type="checkbox" className="form-check-input" id="soy" />
-							</label>
-						</div>
-					</div>
-					<div className="row">
-						<div className="col">
-							<label className="form-check-label" htmlFor="seafood">
-								Seafood
-								<input
-									type="checkbox"
-									className="form-check-input"
-									id="seafood"
-								/>
-							</label>
-						</div>
-						<div className="col">
-							<label className="form-check-label" htmlFor="shellfish">
-								Shellfish
-								<input
-									type="checkbox"
-									className="form-check-input"
-									id="shellfish"
-								/>
-							</label>
-						</div>
-						<div className="col">
-							<label className="form-check-label" htmlFor="sulphite">
-								Sulphite
-								<input
-									type="checkbox"
-									className="form-check-input"
-									id="sulphite"
-								/>
-							</label>
-						</div>
-						<div className="col">
-							<label className="form-check-label" htmlFor="wheat">
-								Wheat
-								<input
-									type="checkbox"
-									className="form-check-input"
-									id="wheat"
-								/>
-							</label>
-						</div>
-					</div>
+					<input
+						className="form-control"
+						ref={search}
+						type="text"
+						name="search"
+						label="recipe"
+						aria-describedby="Recipe search field"
+						placeholder="Search recipes, ingredients, nutrients..."
+					/>
 				</div>
 				<button
 					type="submit"
-					className="btn btn-primary"
+					className="btn btn-warning"
 					onClick={handleFormSubmit}
 				>
-					Submit
+					Get inspirations!
 				</button>
 			</form>
-			<Container>
-				<Row>{searchData.results.map(getList)}</Row>
-			</Container>
+			<div>
+				<h5>
+					Your intolerances: {"  "}
+					<span className="options">{getFilters()}</span>
+				</h5>
+
+				<div className="fluid-container">
+					<div className="intolerances row">{getIntolerances()}</div>
+				</div>
+			</div>
+
+			{/* <SearchResults key={}/> */}
 		</div>
 	);
 }
-
 export default Searchform;
