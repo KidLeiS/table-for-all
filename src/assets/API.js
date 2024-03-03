@@ -3,7 +3,7 @@ import axios from "axios";
 const baseURL = "https://api.spoonacular.com/recipes/complexSearch?query=";
 
 const apikey =
-	"&number=6&apiKey=8566f284fe514e5889d5a1578ab3f80a&intolerances=";
+	"&number=6&apiKey=e6188429efc9449f8621d7236d9e8a3f&intolerances=";
 
 export default {
 	search: function (query, filter) {
