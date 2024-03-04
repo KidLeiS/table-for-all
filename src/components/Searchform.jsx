@@ -81,8 +81,6 @@ function Searchform() {
 		results: [],
 	});
 
-	const filters = document.querySelector(".options");
-
 	const getRecipe = (query, filter) => {
 		API.search(query, filter)
 			.then((res) => {
@@ -141,6 +139,9 @@ function Searchform() {
 			[name]: value,
 		});
 	};
+
+	const filters = document.querySelector(".options");
+
 	const handleFormSubmit = (event) => {
 		event.preventDefault();
 		getRecipe(searchRecipe.search, filters.textContent);
@@ -177,7 +178,7 @@ function Searchform() {
 					<div className="intolerances row">{getIntolerances()}</div>
 				</div>
 			</Row>
-			<Col lg={5} sm={12}>
+			{/* <Col lg={5} sm={12}>
 				{searchRecipe.results.map((data) => (
 					<Link to={`/recipe/${data.id}`}>
 						<Card
@@ -195,7 +196,8 @@ function Searchform() {
 						</Card>
 					</Link>
 				))}
-			</Col>
+			</Col> */}
+			<SearchResults results={searchRecipe.results} />
 		</Container>
 	);
 }

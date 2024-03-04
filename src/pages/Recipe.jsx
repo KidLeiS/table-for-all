@@ -1,39 +1,9 @@
-import axios from "axios";
 import { Button } from "react-bootstrap";
-import Wrapper from "../components/Wrapper";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Searchform from "../components/Searchform";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 const Recipe = () => {
-	// function Recipe(id) {
-	// 	axios
-	// 		.get(
-	// 			`https://api.spoonacular.com/recipes/${id}/information?apiKey=e6188429efc9449f8621d7236d9e8a3f`
-	// 		)
-	// 		.then((res) => {
-	// 			let data = res.data;
-	// 			console.log(data);
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log(err);
-	// 		});
-
-	// 	return (
-	// 		<div>
-	// 			<Searchform />
-	// 			<p>
-	// 				{id}
-	// 				{/* Instructions: {instructions}
-	// 				Vegetarian: {vegetarian}
-	// 				Vegan: {glutenFree}
-	// 				Dairy free: {dairyFree}
-	// 				Serving: {servings}
-	// 				Cooking time: {readyInMinutes} minutes */}
-	// 				Recipe information placeholder
-	// 			</p>
-	// 		</div>
-	// 	);
-
 	const [details, setDetails] = useState({});
 	const [activeTab, setActiveTab] = useState("instructions");
 
@@ -41,7 +11,7 @@ const Recipe = () => {
 
 	const fetchDetails = async () => {
 		const res = await fetch(
-			`https://api.spoonacular.com/recipes/${params.id}/information?apiKey=e6188429efc9449f8621d7236d9e8a3f`
+			`https://api.spoonacular.com/recipes/${params.id}/information?apiKey=6ce5f88a05584207a7d60ceeb5e65a9f`
 		);
 		const data = await res.json();
 		return data;
@@ -59,10 +29,36 @@ const Recipe = () => {
 	}, [params.id]);
 
 	return (
-		<Wrapper>
-			<div>
-				<h2>{details.title}</h2>
-				<img src={details.image} alt={details.title} />
+		<div>
+			<div className="card">
+				<div className="row g-0">
+					<div className="col-md-8">
+						<img
+							src={details.image}
+							className="img-fluid rounded-start"
+							alt={details.title}
+						/>
+					</div>
+					<div className="col-md-4">
+						<div className="card-body">
+							<h2 className="card-title">{details.title}</h2>
+							<div className="card-text">
+								<p className="card-text"> Vegetarian: </p>
+								<p className="card-text">{`${details.vegetarian}`}</p>
+								<p className="card-text">Vegan: </p>
+								<p className="card-text">{`${details.vegan}`}</p>
+								<p className="card-text">Gluten free: </p>
+								<p className="card-text"> {`${details.glutenFree}`}</p>
+								<p className="card-text">Dairy free: </p>
+								<p className="card-text">{`${details.dairyFree}`}</p>
+								<p className="card-text">Serving: </p>
+								<p className="card-text">{details.servings}</p>
+								<p className="card-text">Cooking time:</p>
+								<p className="card-text">{details.readyInMinutes} minutes</p>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<Button
@@ -84,12 +80,6 @@ const Recipe = () => {
 							<p key={id}>{original}</p>
 						))}
 					</p>
-					<p>
-						Vegetarian: {details.vegetarian}Vegan: {details.glutenFree} Dairy
-						free: {details.dairyFree}
-						Serving: {details.servings} Cooking time: {details.readyInMinutes}{" "}
-						minutes
-					</p>
 				</div>
 			)}
 
@@ -99,7 +89,7 @@ const Recipe = () => {
 					<p dangerouslySetInnerHTML={{ __html: details.instructions }}></p>
 				</div>
 			)}
-		</Wrapper>
+		</div>
 	);
 };
 
