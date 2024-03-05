@@ -96,7 +96,7 @@ const Recipe = () => {
 						)}
 
 						{activeTab === "instructions" && (
-							<div className="container p-5">
+							<div className="container p-5 info">
 								<div
 									dangerouslySetInnerHTML={{ __html: details.summary }}
 								></div>
