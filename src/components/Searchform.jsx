@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import API from "../assets/API";
 import "bootstrap/dist/css/bootstrap.css";
-import axios from "axios";
-import { Button, Card, Col, Row, Container, Form } from "react-bootstrap";
+import { Row, Container, Form, InputGroup } from "react-bootstrap";
 import SearchResults from "../pages/Searchresults";
-import { Link, useNavigate } from "react-router-dom";
-import Recipe from "../pages/Recipe";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 function Searchform() {
 	const intolerances = [
@@ -100,7 +100,7 @@ function Searchform() {
 					onClick={() => handleCheckbox(item.name)}
 				/>
 				{item.checked}
-				<label className="btn btn-outline-danger" htmlFor={item.name}>
+				<label className="btn btn-outline-light" htmlFor={item.name}>
 					{item.name}
 				</label>
 			</div>
@@ -149,28 +149,31 @@ function Searchform() {
 
 	return (
 		<Container>
-			<Form>
-				<div className="mb-3">
-					<input
-						className="form-control"
-						type="text"
-						onChange={handleInputChange}
-						name="search"
-						aria-describedby="Recipe search field"
-						placeholder="Search recipes, ingredients, nutrients..."
-					/>
-				</div>
-				<button
-					type="submit"
-					className="btn btn-warning"
-					onClick={handleFormSubmit}
-				>
-					Get inspirations!
-				</button>
-			</Form>
-			<Row>
+			<InputGroup>
+				<Form.Control
+					type="text"
+					onChange={handleInputChange}
+					name="search"
+					aria-describedby="Recipe search field"
+					placeholder="Search recipes, ingredients, nutrients..."
+				/>
+
+				<InputGroup.Text>
+					<Link to={`/search/${searchRecipe.search}`}>
+						<FontAwesomeIcon
+							icon={faMagnifyingGlass}
+							size="2xl"
+							style={{ color: "#000000" }}
+							type="submit"
+							onClick={handleFormSubmit}
+						/>
+					</Link>
+				</InputGroup.Text>
+			</InputGroup>
+
+			<Row className="m-3">
 				<h5>
-					Your intolerances: {"  "}
+					⛔Your intolerances:⛔
 					<span className="options">{getFilters()}</span>
 				</h5>
 
@@ -178,25 +181,6 @@ function Searchform() {
 					<div className="intolerances row">{getIntolerances()}</div>
 				</div>
 			</Row>
-			{/* <Col lg={5} sm={12}>
-				{searchRecipe.results.map((data) => (
-					<Link to={`/recipe/${data.id}`}>
-						<Card
-							className="m-4"
-							border="light"
-							onClick={(e) => {
-								e.preventDefault();
-								Recipe(data.id);
-							}}
-						>
-							<Card.Img key={data.id} src={data.image} alt={data.title} />
-							<Card.Body>
-								<Card.Title>{data.title}</Card.Title>
-							</Card.Body>
-						</Card>
-					</Link>
-				))}
-			</Col> */}
 			<SearchResults results={searchRecipe.results} />
 		</Container>
 	);

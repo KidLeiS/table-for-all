@@ -7,8 +7,8 @@ import History from "./pages/History";
 import About from "./pages/About";
 import "./App.css";
 import Recipe from "./pages/Recipe";
-// import Searchform from "./components/Searchform";
-// import Pages from "./pages/Pages";
+import SearchResults from "./pages/Searchresults";
+import Searchform from "./components/Searchform";
 
 function App() {
 	return (
@@ -18,6 +18,7 @@ function App() {
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/home" element={<Home />} />
+					<Route path="/search/:searchRecipe.search" element={<Searchform />} />
 					<Route path="/recipe/:id" element={<Recipe />} />
 					<Route path="/history" element={<History />} />
 					<Route path="/about" element={<About />} />

@@ -1,17 +1,17 @@
 import React from "react";
-import { useState } from "react";
 import Searchform from "../components/Searchform";
+import Pages from "./Pages";
 
 function Home(props) {
 	return (
-		<div>
-			<br />
-			<h1>Dinner Party Planner</h1>
-			<div className="container text-center">
-				<p>
-					The website which allows you to compile a series of recipes, for your
-					next dinner party!
-				</p>
+		<div style={{ backgroundColor: "rgb(0,0,0,0.7)", borderRadius: 25 }}>
+			<div>
+				<h1 className="title p-4">Table for All</h1>
+				<div className="container text-center">
+					<h2 className="handwritten">
+						Make Your Own Cookbook for Home Dinner Parties
+					</h2>
+				</div>
 			</div>
 			<Searchform />
 		</div>

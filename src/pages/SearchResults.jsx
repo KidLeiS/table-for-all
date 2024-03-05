@@ -1,31 +1,39 @@
 import React, { useState, useEffect } from "react";
-import API from "../assets/API";
 import "bootstrap/dist/css/bootstrap.css";
-import { Link, useLocation } from "react-router-dom";
-import { Col, Card, Row, Container } from "react-bootstrap";
-import axios from "axios";
+import { Link } from "react-router-dom";
+import { Col, Card, CardGroup } from "react-bootstrap";
 
 const SearchResults = (props) => {
 	return (
-		<Col lg={5} sm={12}>
-			{props.results.map(({ title, id, image }) => (
+		<CardGroup className="justify-content-around">
+			{props.results.map(({ title, id, image, imageType }) => (
 				<Link to={`/recipe/${id}`}>
 					<Card
-						className="m-4"
+						key={title.split("")}
+						style={{ width: "25rem", borderRadius: 25 }}
 						border="light"
-						// onClick={(e) => {
-						// 	e.preventDefault();
-						// 	Recipe(data.id);
-						// }}
+						className="m-3"
 					>
-						<Card.Img key={id} src={image} alt={title} />
-						<Card.Body>
-							<Card.Title>{title}</Card.Title>
+						<Card.Img
+							variant="top"
+							key={{ id } + { imageType }}
+							src={image}
+							alt={title}
+							style={{ borderRadius: 25 }}
+						/>
+						<Card.Body key="card-body">
+							<Card.Title
+								style={{ fontSize: "2.2rem" }}
+								className="handwritten"
+								key={id}
+							>
+								{title}
+							</Card.Title>
 						</Card.Body>
 					</Card>
 				</Link>
 			))}
-		</Col>
+		</CardGroup>
 	);
 };
 

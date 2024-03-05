@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUtensils } from "@fortawesome/free-solid-svg-icons";
 import "./Navbar.css";
 
 function Navbar() {
 	return (
 		<nav className="navbar navbar-expand-lg bg-body-tertiary">
 			<div className="container-fluid">
-				<Link to="./Home" className="navbar-brand">
-					DPP
+				<Link to="./" className="navbar-brand">
+					<FontAwesomeIcon icon={faUtensils} size="2xl" />
 				</Link>
 				<button
 					className="navbar-toggler"
@@ -22,11 +24,11 @@ function Navbar() {
 				</button>
 				<div className="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul className="navbar-nav me-auto mb-2 mb-lg-0">
-						<li className="nav-item">
+						{/* <li className="nav-item">
 							<Link to="./Home" className="nav-link active" aria-current="page">
 								Home
 							</Link>
-						</li>
+						</li> */}
 						<li className="nav-item">
 							<Link to="./History" className="nav-link">
 								History
