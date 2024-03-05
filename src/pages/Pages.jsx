@@ -1,6 +1,6 @@
 import { Routes, Route, Router, useLocation } from "react-router-dom";
 import Recipe from "./Recipe";
-import SearchResults from "./Searchresults";
+import SearchResults from "./SearchResults";
 import Home from "./Home";
 
 const Pages = () => {

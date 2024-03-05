@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import "bootstrap/dist/css/bootstrap.css";
+import InfoImg from "../assets/info.jpg";
 
 const Recipe = () => {
 	const [details, setDetails] = useState({});
@@ -65,10 +66,7 @@ const Recipe = () => {
 					<div
 						className="col-lg-7 col-md-10 col-sm-12 m-2 text-black text-start fs-4"
 						style={{
-							backgroundImage:
-								"url(" +
-								"https://images.unsplash.com/photo-1616410731303-6affae095a0a?q=80&w=2002&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" +
-								")",
+							backgroundImage: `url(${InfoImg})`,
 							backgroundSize: "cover",
 						}}
 					>
