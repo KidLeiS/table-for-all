@@ -8,7 +8,7 @@ function Navbar() {
 	return (
 		<nav className="navbar navbar-expand-lg bg-body-tertiary">
 			<div className="container-fluid">
-				<Link to="./" className="navbar-brand">
+				<Link to="./home" className="navbar-brand">
 					<FontAwesomeIcon icon={faUtensils} size="2xl" />
 				</Link>
 				<button

@@ -9,6 +9,7 @@ import "./App.css";
 import Recipe from "./pages/Recipe";
 import SearchResults from "./pages/Searchresults";
 import Searchform from "./components/Searchform";
+import Pages from "./pages/Pages";
 
 function App() {
 	return (
@@ -18,7 +19,10 @@ function App() {
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/home" element={<Home />} />
-					<Route path="/search/:searchRecipe.search" element={<Searchform />} />
+					<Route
+						path="/search/:searchRecipe.search"
+						element={<SearchResults />}
+					/>
 					<Route path="/recipe/:id" element={<Recipe />} />
 					<Route path="/history" element={<History />} />
 					<Route path="/about" element={<About />} />

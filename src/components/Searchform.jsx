@@ -6,8 +6,9 @@ import { Row, Container, Form, InputGroup } from "react-bootstrap";
 import SearchResults from "../pages/Searchresults";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 
-function Searchform() {
+function Searchform(props) {
 	const intolerances = [
 		{
 			id: "dairy",
@@ -84,7 +85,7 @@ function Searchform() {
 	const getRecipe = (query, filter) => {
 		API.search(query, filter)
 			.then((res) => {
-				setSearchRecipe({ ...searchRecipe, results: res.data.results });
+				setSearchRecipe({ search: props.query, results: res.data.results });
 			})
 			.catch((err) => console.log(err));
 	};
@@ -181,7 +182,11 @@ function Searchform() {
 					<div className="intolerances row">{getIntolerances()}</div>
 				</div>
 			</Row>
-			<SearchResults results={searchRecipe.results} />
+
+			<SearchResults
+				search={searchRecipe.search}
+				results={searchRecipe.results}
+			/>
 		</Container>
 	);
 }

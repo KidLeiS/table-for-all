@@ -11,7 +11,7 @@ const Recipe = () => {
 
 	const fetchDetails = async () => {
 		const res = await fetch(
-			`https://api.spoonacular.com/recipes/${params.id}/information?apiKey=e6188429efc9449f8621d7236d9e8a3f`
+			`https://api.spoonacular.com/recipes/${params.id}/information?apiKey=8566f284fe514e5889d5a1578ab3f80a`
 		);
 		const data = await res.json();
 		return data;
@@ -31,9 +31,9 @@ const Recipe = () => {
 	return (
 		<div>
 			<div className="container-fliud">
-				<div className="row m-3 p-5 d-flex justify-content-around">
-					<div className="col-lg-5 col-md-10 col-sm-12 ">
-						<div className="card rounded-5">
+				<div className="row m-3 d-flex justify-content-around">
+					<div className="col-lg-4 col-md-10 col-sm-12 ">
+						<div className="card  rounded-5">
 							<img
 								src={details.image}
 								className="rounded-5 card-img-top"
@@ -62,7 +62,16 @@ const Recipe = () => {
 							</ul>
 						</div>
 					</div>
-					<div className="col-lg-6 col-md-10 col-sm-12 text-start fs-4">
+					<div
+						className="col-lg-7 col-md-10 col-sm-12 m-2 text-black text-start fs-4"
+						style={{
+							backgroundImage:
+								"url(" +
+								"https://images.unsplash.com/photo-1616410731303-6affae095a0a?q=80&w=2002&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" +
+								")",
+							backgroundSize: "cover",
+						}}
+					>
 						<Button
 							className={activeTab === "ingredients" ? "active" : ""}
 							onClick={() => setActiveTab("ingredients")}
@@ -77,7 +86,7 @@ const Recipe = () => {
 						</Button>
 
 						{activeTab === "ingredients" && (
-							<div className="p-5 bg-dark  text-white bg-opacity-75">
+							<div className="p-5 info">
 								<div>
 									{details.extendedIngredients.map(({ id, original }) => (
 										<p key={id}>{original}</p>
@@ -87,11 +96,12 @@ const Recipe = () => {
 						)}
 
 						{activeTab === "instructions" && (
-							<div className="p-5 bg-dark  text-white bg-opacity-75">
+							<div className="container p-5">
 								<div
 									dangerouslySetInnerHTML={{ __html: details.summary }}
 								></div>
 								<div
+									className="mt-5"
 									dangerouslySetInnerHTML={{ __html: details.instructions }}
 								></div>
 							</div>
@@ -113,11 +123,15 @@ const Info = styled.div`
 `;
 const Button = styled.button`
 	padding: 1rem 2rem;
-	color: #313131;
-	background: #fff;
-	border: 2px solid #000;
+	// color: none;
+	background: transparent;
+	// border: 2px solid #000;
+	text-decoration: underline;
+	text-underline-offset: 15px;
 	margin-right: 2rem;
-	font-weight: 600;
+	font-weight: 400;
+	font-size: 2rem;
+	font-family: "Shadows Into Light", cursive;
 `;
 
 export default Recipe;
