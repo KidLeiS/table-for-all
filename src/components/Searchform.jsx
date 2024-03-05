@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import API from "../assets/API";
 import "bootstrap/dist/css/bootstrap.css";
 import { Row, Container, Form, InputGroup } from "react-bootstrap";
-import SearchResults from "../pages/Searchresults";
+import SearchResults from "../pages/SearchResults";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";

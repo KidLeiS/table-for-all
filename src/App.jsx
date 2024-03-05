@@ -7,7 +7,7 @@ import History from "./pages/History";
 import About from "./pages/About";
 import "./App.css";
 import Recipe from "./pages/Recipe";
-import SearchResults from "./pages/Searchresults";
+import SearchResults from "./pages/SearchResults";
 import Searchform from "./components/Searchform";
 import Pages from "./pages/Pages";
 
