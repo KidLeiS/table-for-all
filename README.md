@@ -1,8 +1,24 @@
-# React + Vite
+# README
+  [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+  ## Description
+  Simple web application, utlising skills and knowledge obtained through the EdX FullStack Developer BootCamp (React/JS/CSS/Bootstrap/HTML)for planning your dinner
 
-Currently, two official plugins are available:
+  ## Table of Contents
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [License](#license)
+  - [Contributing](#contributing)
+  - [Tests](#tests)
+  - [Questions](#questions)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+  ## Installation  
+
+  ## Usage
+
+  ## License
+  This application is released under the GNU General Public License v3.0 license. Please refer to the license file for more information.
+
+  ## Contributing
+
+  ## Questions
