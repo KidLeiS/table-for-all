@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import "bootstrap/dist/css/bootstrap.css";
 import InfoImg from "../assets/info.jpg";
+import Download from '../components/Download';
 
 const Recipe = () => {
 	const [details, setDetails] = useState({});
@@ -17,6 +18,8 @@ const Recipe = () => {
 		const data = await res.json();
 		return data;
 	};
+
+	
 
 	useEffect(() => {
 		let isMounted = true;
@@ -82,6 +85,12 @@ const Recipe = () => {
 						>
 							Instructions
 						</Button>
+						<Button 
+							className={activeTab === "download" ? "active" : ""}
+							onClick={() => setActiveTab("download")}
+						>
+							Download
+						</Button>
 
 						{activeTab === "ingredients" && (
 							<div className="p-5 info">
@@ -102,6 +111,14 @@ const Recipe = () => {
 									className="mt-5"
 									dangerouslySetInnerHTML={{ __html: details.instructions }}
 								></div>
+							</div>
+						)}
+
+						{activeTab === "download" && (
+							<div className="p-5 info">
+								<Download download={
+									`${details.title}\n\n${details.summary.replace(/(<([^>]+)>)/ig, '')}\n\nIngredients:\n${details.extendedIngredients.map(({ id, original }) => (`${original}\n`)).join("")}\n\nInstructions: \n${details.instructions.replace(/(<([^>]+)>)/ig, '')}`
+								} />
 							</div>
 						)}
 					</div>
