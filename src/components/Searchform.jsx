@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import API from "../assets/API";
 import "bootstrap/dist/css/bootstrap.css";
 import { Row, Container, Form, InputGroup } from "react-bootstrap";

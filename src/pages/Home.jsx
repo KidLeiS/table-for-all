@@ -9,7 +9,7 @@ function Home(props) {
 				<h1 className="title p-4">Table for All</h1>
 				<div className="container text-center">
 					<h2 className="handwritten">
-						Make Your Own Cookbook for Home Dinner Parties
+						Print Your Own Recipes for Home Dinner Parties
 					</h2>
 				</div>
 			</div>
