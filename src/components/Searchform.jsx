@@ -101,7 +101,11 @@ function Searchform(props) {
 					onClick={() => handleCheckbox(item.name)}
 				/>
 				{item.checked}
-				<label className="btn btn-outline-light" htmlFor={item.name}>
+				<label
+					className="btn btn-outline-light"
+					style={{ fontSize: "0.8rem" }}
+					htmlFor={item.name}
+				>
 					{item.name}
 				</label>
 			</div>
@@ -147,7 +151,7 @@ function Searchform(props) {
 		event.preventDefault();
 		getRecipe(searchRecipe.search, filters.textContent);
 	};
-
+	console.log(searchRecipe.search);
 	return (
 		<Container>
 			<InputGroup>
