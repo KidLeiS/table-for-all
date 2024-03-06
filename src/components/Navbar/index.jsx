@@ -24,16 +24,6 @@ function Navbar() {
 				</button>
 				<div className="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul className="navbar-nav me-auto mb-2 mb-lg-0">
-						{/* <li className="nav-item">
-							<Link to="./Home" className="nav-link active" aria-current="page">
-								Home
-							</Link>
-						</li> */}
-						<li className="nav-item">
-							<Link to="./History" className="nav-link">
-								History
-							</Link>
-						</li>
 						<li className="nav-item">
 							<Link to="./About" className="nav-link">
 								About

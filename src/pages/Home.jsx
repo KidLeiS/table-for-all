@@ -1,8 +1,7 @@
 import React from "react";
 import Searchform from "../components/Searchform";
-import Pages from "./Pages";
 
-function Home(props) {
+function Home() {
 	return (
 		<div style={{ backgroundColor: "rgb(0,0,0,0.5)", borderRadius: 25 }}>
 			<div>

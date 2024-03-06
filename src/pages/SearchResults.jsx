@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { Link } from "react-router-dom";
-import { Col, Card, CardGroup } from "react-bootstrap";
+import { Card, CardGroup } from "react-bootstrap";
 
 const SearchResults = (props) => {
 	return (

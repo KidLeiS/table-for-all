@@ -21,7 +21,6 @@ function App() {
 					<Route path="/home" element={<Home />} />
 					<Route path="/search/:search" element={<Searchform />} />
 					<Route path="/recipe/:id" element={<Recipe />} />
-					<Route path="/history" element={<History />} />
 					<Route path="/about" element={<About />} />
 				</Routes>
 			</Wrapper>
