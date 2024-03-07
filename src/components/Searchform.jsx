@@ -150,7 +150,7 @@ function Searchform(props) {
 		event.preventDefault();
 		getRecipe(searchRecipe.search, filters.textContent);
 	};
-	console.log(searchRecipe.search);
+
 	return (
 		<Container>
 			<InputGroup>
@@ -163,7 +163,7 @@ function Searchform(props) {
 				/>
 
 				<InputGroup.Text>
-					<Link to={`/search/${searchRecipe.search}`}>
+					<Link to={`/search`}>
 						<FontAwesomeIcon
 							icon={faMagnifyingGlass}
 							size="2xl"
